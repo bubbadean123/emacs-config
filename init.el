@@ -2,6 +2,7 @@
 ;; debugging
 (setq debug-on-error t)
 (setq stack-trace-on-error 1)
+(setq column-number-mode t)
 
 ;; add to load paths
 (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
@@ -13,7 +14,7 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (scroll-bar-mode -1)
 
-(setq package-archives '(("ELPA" . "http://tromey.com/elpa/") 
+(setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
 			 ("gnu" . "http://elpa.gnu.org/packages/")))
 
 (global-set-key [f1] 'goto-line)
@@ -26,6 +27,7 @@
 (global-set-key (kbd "C-M-<down>") 'duplicate-line-down)
 (global-set-key (kbd "M-<up>") 'move-line-up)
 (global-set-key (kbd "M-<down>") 'move-line-down)
+(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")
 
 ;;Global Settings
 (setq inhibit-startup-message t)
@@ -49,6 +51,10 @@
 ;;Dart mode
 (require 'dart-mode)
 (add-to-list 'auto-mode-alist '("\\.dart\\'" . dart-mode))
+
+;;Show whitespace in ruby
+(require 'highlight-chars)
+(add-hook 'ruby-mode-hook 'hc-highlight-trailing-whitespace)
 
 ;; better mouse scrolling
 (require 'smooth-scrolling)
