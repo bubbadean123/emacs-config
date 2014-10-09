@@ -3,6 +3,9 @@
 (setq debug-on-error t)
 (setq stack-trace-on-error 1)
 (setq column-number-mode t)
+(setq misc_functions "~/.emacs.d/misc_functions.el")
+(load misc_functions)
+(require 'misc_functions)
 
 ;; add to load paths
 (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
@@ -23,6 +26,7 @@
 (global-set-key "\C-x\C-b" 'buffer-menu) ;; so the buffer list appears in the current window
 (global-set-key [(ctrl /)] 'comment-or-uncomment-region)
 ;;Chris's custom functions
+
 (global-set-key (kbd "C-M-<up>") 'duplicate-line-up)
 (global-set-key (kbd "C-M-<down>") 'duplicate-line-down)
 (global-set-key (kbd "M-<up>") 'move-line-up)
@@ -52,6 +56,10 @@
 (require 'dart-mode)
 (add-to-list 'auto-mode-alist '("\\.dart\\'" . dart-mode))
 
+;;YAML mode
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
 ;;Show whitespace in ruby
 (require 'highlight-chars)
 (add-hook 'ruby-mode-hook 'hc-highlight-trailing-whitespace)
@@ -70,6 +78,7 @@
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+(setq ruby-insert-encoding-magic-comment nil)
 
 ;;; Taken from http://www.emacswiki.org/emacs/AutoIndentation#SmartPaste
 
