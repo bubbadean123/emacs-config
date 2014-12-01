@@ -15,7 +15,7 @@
       (normal-top-level-add-subdirs-to-load-path)))
 
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(scroll-bar-mode -1)
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 (setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
 			 ("gnu" . "http://elpa.gnu.org/packages/")))
@@ -35,6 +35,7 @@
 
 ;;Global Settings
 (setq inhibit-startup-message t)
+(setq global-auto-revert-mode t)
 
 ;;Add Autopair
 (require 'autopair)
