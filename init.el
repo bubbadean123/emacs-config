@@ -3,13 +3,13 @@
 (setq debug-on-error t)
 (setq stack-trace-on-error 1)
 (setq column-number-mode t)
-(setq misc_functions "~/.emacs.d/misc_functions.el")
+(setq misc_functions "~/.emacs.d/elisp/misc_functions.el")
 (load misc_functions)
 (require 'misc_functions)
 
 ;; add to load paths
 (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-    (let* ((my-lisp-dir "~/.emacs.d/")
+    (let* ((my-lisp-dir "~/.emacs.d/elisp/")
 	   (default-directory my-lisp-dir))
       (setq load-path (cons my-lisp-dir load-path))
       (normal-top-level-add-subdirs-to-load-path)))
@@ -77,7 +77,7 @@
 
 (line-number-mode 1)
 
-(setq custom-file "~/.emacs.d/custom.el")
+(setq custom-file "~/.emacs.d/elisp/custom.el")
 (load custom-file)
 (setq ruby-insert-encoding-magic-comment nil)
 
@@ -95,3 +95,4 @@
 						     plain-tex-mode))
 		(let ((mark-even-if-inactive transient-mark-mode))
 		  (indent-region (region-beginning) (region-end) nil))))))
+(put 'downcase-region 'disabled nil)
