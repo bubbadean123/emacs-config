@@ -17,8 +17,12 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-(setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
-			 ("gnu" . "http://elpa.gnu.org/packages/")))
+(require 'package)
+(add-to-list 'package-archives
+	     '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+	     '("gnu" . "http://elpa.gnu.org/packages/"))
+(package-initialize)
 
 (global-set-key [f1] 'goto-line)
 
@@ -96,3 +100,28 @@
 		(let ((mark-even-if-inactive transient-mark-mode))
 		  (indent-region (region-beginning) (region-end) nil))))))
 (put 'downcase-region 'disabled nil)
+
+(load-theme 'cobalt t t)
+(enable-theme 'cobalt)
+
+(autoload 'tidy-buffer "tidy" "Run Tidy HTML parser on current buffer" t)
+(autoload 'tidy-parse-config-file "tidy" "Parse the `tidy-config-file'" t)
+(autoload 'tidy-save-settings "tidy" "Save settings to `tidy-config-file'" t)
+(autoload 'tidy-build-menu  "tidy" "Install an options menu for HTML Tidy." t)
+
+;; make backup to a designated dir, mirroring the full path
+
+(defun my-backup-file-name (fpath)
+  "Return a new file path of a given file path.
+If the new path's directories does not exist, create them."
+  (let* (
+	 (backupRootDir "~/.emacs.d/emacs-backup/")
+	 (filePath (replace-regexp-in-string "[A-Za-z]:" "" fpath )) ; remove Windows driver letter in path, for example, “C:”
+	 (backupFilePath (replace-regexp-in-string "//" "/" (concat backupRootDir filePath "~") ))
+	 )
+    (make-directory (file-name-directory backupFilePath) (file-name-directory backupFilePath))
+    backupFilePath
+    )
+  )
+
+(setq make-backup-file-name-function 'my-backup-file-name)
